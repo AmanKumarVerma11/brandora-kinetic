@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import logoImage from "@/assets/logo.png";
 
 const navLinks = [
   { name: "Home", href: "#hero" },
@@ -39,10 +40,14 @@ export const Header = () => {
         <div className="container mx-auto px-6 flex items-center justify-between">
           <motion.a 
             href="#hero"
-            className="text-2xl font-display font-bold gradient-text"
+            className="flex items-center"
             whileHover={{ scale: 1.05 }}
           >
-            BRANDORA
+            <img 
+              src={logoImage} 
+              alt="Brandora Creations" 
+              className="h-10 w-auto invert"
+            />
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -93,9 +98,11 @@ export const Header = () => {
           >
             <div className="flex flex-col h-full p-6">
               <div className="flex justify-between items-center">
-                <span className="text-2xl font-display font-bold gradient-text">
-                  BRANDORA
-                </span>
+                <img 
+                  src={logoImage} 
+                  alt="Brandora Creations" 
+                  className="h-10 w-auto invert"
+                />
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 text-foreground"
