@@ -1,10 +1,16 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export const ScrollShapes = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: isMounted ? ref : undefined,
     offset: ["start end", "end start"],
   });
 

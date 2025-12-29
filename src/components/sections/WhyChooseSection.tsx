@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { FadeInView, ScaleInView } from "@/components/ui/ParallaxWrapper";
 import { StaggeredText } from "@/components/ui/StaggeredText";
 import { Check } from "lucide-react";
@@ -58,6 +58,7 @@ const process = [
   },
 ];
 
+
 const colorMap: Record<string, string> = {
   "electric-blue": "hsl(var(--electric-blue))",
   "vivid-red": "hsl(var(--vivid-red))",
@@ -67,9 +68,15 @@ const colorMap: Record<string, string> = {
 
 // Connecting line component with scroll animation
 const ConnectingLine = ({ index }: { index: number }) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: isMounted ? ref : undefined,
     offset: ["start center", "end center"],
   });
 
