@@ -46,7 +46,7 @@ export const Header = () => {
             <img 
               src={logoImage} 
               alt="Brandora Creations logo" 
-              className="h-12 md:h-14 w-auto"
+              className="h-16 md:h-18 w-auto"
             />
           </motion.a>
 
@@ -101,7 +101,7 @@ export const Header = () => {
                 <img 
                   src={logoImage} 
                   alt="Brandora Creations logo" 
-                  className="h-12 w-auto"
+                  className="h-14 w-auto"
                 />
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
