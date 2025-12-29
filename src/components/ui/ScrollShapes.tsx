@@ -10,7 +10,6 @@ export const ScrollShapes = () => {
   }, []);
 
   const { scrollYProgress } = useScroll({
-    target: isMounted ? ref : undefined,
     offset: ["start end", "end start"],
   });
 
