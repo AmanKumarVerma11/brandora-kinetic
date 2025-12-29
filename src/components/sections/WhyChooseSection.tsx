@@ -58,7 +58,6 @@ const process = [
   },
 ];
 
-
 const colorMap: Record<string, string> = {
   "electric-blue": "hsl(var(--electric-blue))",
   "vivid-red": "hsl(var(--vivid-red))",
@@ -82,11 +81,11 @@ const ConnectingLine = ({ index }: { index: number }) => {
 
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  if (index >= 3) return null; // No line after last item
+  if (index >= 3) return null;
 
   return (
     <div ref={ref} className="hidden lg:block absolute top-1/2 left-full w-full h-1 z-0">
-      <div className="absolute inset-0 bg-border/30 rounded-full" />
+      <div className="absolute inset-0 bg-border rounded-full" />
       <motion.div
         className="absolute inset-0 rounded-full origin-left"
         style={{
@@ -100,7 +99,7 @@ const ConnectingLine = ({ index }: { index: number }) => {
 
 export const WhyChooseSection = () => {
   return (
-    <section className="relative py-32 overflow-hidden bg-card">
+    <section className="relative py-32 overflow-hidden bg-background">
       {/* Noise overlay */}
       <div className="noise-overlay" />
 
@@ -109,29 +108,32 @@ export const WhyChooseSection = () => {
         <div className="mb-32">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <FadeInView>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-accent/20 text-accent text-sm font-bold mb-6 border border-accent/30">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-bold mb-6">
                 Why Brandora
               </span>
             </FadeInView>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6 text-foreground">
               <StaggeredText text="What Sets Us" />
-              <span className="block gradient-text mt-2">
+              <span className="block mt-2 highlight-orange">
                 <StaggeredText text="Apart" delay={0.2} />
               </span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {differentiators.map((item, index) => (
               <FadeInView key={item.title} delay={index * 0.1}>
                 <motion.div
-                  className="p-6 rounded-2xl border-2 border-border bg-background/50 backdrop-blur-sm h-full yellow-glow-border"
-                  whileHover={{ y: -4 }}
+                  className="p-6 rounded-2xl border-2 border-foreground bg-background h-full transition-all duration-300 card-pop-blue"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-warning flex items-center justify-center flex-shrink-0">
-                      <Check className="w-4 h-4 text-background" />
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                      <Check className="w-4 h-4 text-primary-foreground" />
                     </div>
                     <div>
                       <h3 className="font-display font-bold text-lg mb-2 text-foreground">{item.title}</h3>
@@ -150,38 +152,41 @@ export const WhyChooseSection = () => {
         <div>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <FadeInView>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-bold mb-6 border border-primary/30">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-sm font-bold mb-6">
                 Our Process
               </span>
             </FadeInView>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight text-foreground">
               <StaggeredText text="Our Proven 4-Step" />
-              <span className="block gradient-text-blue mt-2">
+              <span className="block mt-2 highlight-blue">
                 <StaggeredText text="Process" delay={0.2} />
               </span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
             {process.map((item, index) => (
               <ScaleInView key={item.step} delay={index * 0.1}>
                 <div className="relative">
                   <motion.div
-                    className="relative p-8 rounded-3xl bg-background border-2 border-border h-full yellow-glow-border overflow-hidden"
-                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="relative p-8 rounded-3xl bg-background border-2 border-foreground h-full overflow-hidden transition-all duration-300 card-pop-orange"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    {/* Step number with solid color */}
+                    {/* Step number - visible but light */}
                     <div 
-                      className="text-7xl font-display font-bold absolute -top-2 -left-2 opacity-20"
+                      className="text-8xl font-display font-bold absolute -top-4 -left-2 opacity-10"
                       style={{ color: colorMap[item.color] }}
                     >
                       {item.step}
                     </div>
 
-                    <div className="relative z-10 pt-8">
+                    <div className="relative z-10 pt-10">
                       <div 
-                        className="w-12 h-1 rounded-full mb-6"
+                        className="w-12 h-1.5 rounded-full mb-6"
                         style={{ backgroundColor: colorMap[item.color] }}
                       />
                       <h3 className="font-display font-bold text-xl mb-3 text-foreground">{item.title}</h3>

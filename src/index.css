@@ -7,15 +7,15 @@
 
 @layer base {
   :root {
-    /* Obsidian Black Theme with Electric Accents */
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
+    /* Clean White Light Mode Theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
 
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 4%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
 
     /* Electric Blue as primary */
     --primary: 220 100% 50%;
@@ -25,22 +25,22 @@
     --secondary: 0 100% 50%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Safety Orange */
-    --accent: 30 100% 50%;
+    /* Safety Orange - main accent */
+    --accent: 25 100% 50%;
     --accent-foreground: 0 0% 0%;
 
     /* Bright Yellow */
     --warning: 50 100% 50%;
     --warning-foreground: 0 0% 0%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
 
     --destructive: 0 84% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
     --ring: 220 100% 50%;
 
     --radius: 0.75rem;
@@ -48,23 +48,29 @@
     /* Electric palette */
     --electric-blue: 220 100% 50%;
     --vivid-red: 0 100% 50%;
-    --safety-orange: 30 100% 50%;
+    --safety-orange: 25 100% 50%;
     --bright-yellow: 50 100% 50%;
     --cobalt-blue: 215 100% 40%;
 
-    /* Glow effects */
-    --glow-blue: 0 0 80px hsl(220 100% 50% / 0.5);
-    --glow-red: 0 0 80px hsl(0 100% 50% / 0.5);
-    --glow-orange: 0 0 80px hsl(30 100% 50% / 0.5);
-    --glow-yellow: 0 0 80px hsl(50 100% 50% / 0.5);
+    /* Glow effects for light mode */
+    --glow-blue: 0 8px 30px hsl(220 100% 50% / 0.3);
+    --glow-red: 0 8px 30px hsl(0 100% 50% / 0.3);
+    --glow-orange: 0 8px 30px hsl(25 100% 50% / 0.3);
+    --glow-yellow: 0 8px 30px hsl(50 100% 50% / 0.3);
 
-    --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 0 0% 98%;
+    /* Shadow colors for cards */
+    --shadow-blue: 0 8px 40px hsl(220 100% 50% / 0.25);
+    --shadow-red: 0 8px 40px hsl(0 100% 50% / 0.25);
+    --shadow-orange: 0 8px 40px hsl(25 100% 50% / 0.25);
+    --shadow-yellow: 0 8px 40px hsl(50 100% 50% / 0.25);
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 4%;
     --sidebar-primary: 220 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 20%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 4%;
+    --sidebar-border: 0 0% 88%;
     --sidebar-ring: 220 100% 50%;
   }
 }
@@ -89,53 +95,41 @@
 }
 
 @layer components {
-  /* Noise texture overlay */
+  /* Subtle noise texture for light mode */
   .noise-overlay {
     position: absolute;
     inset: 0;
-    opacity: 0.03;
+    opacity: 0.015;
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
-  /* Grid overlay */
+  /* Light gray geometric grid for neo-brutalism */
   .grid-overlay {
     position: absolute;
     inset: 0;
     background-image: 
-      linear-gradient(to right, hsl(var(--border) / 0.15) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--border) / 0.15) 1px, transparent 1px);
-    background-size: 60px 60px;
+      linear-gradient(to right, hsl(0 0% 0% / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(0 0% 0% / 0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
     pointer-events: none;
-    animation: grid-move 20s linear infinite;
   }
 
-  @keyframes grid-move {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(60px, 60px); }
-  }
-
-  /* Glassmorphism card */
+  /* Glassmorphism card for light mode */
   .glass-card {
-    @apply bg-card/50 backdrop-blur-xl border border-border/50 rounded-2xl;
+    @apply bg-card/80 backdrop-blur-xl border-2 border-foreground/10 rounded-2xl shadow-lg;
   }
 
-  /* Gradient text - Electric multi-color */
+  /* Gradient text - Orange highlight */
   .gradient-text {
-    background: linear-gradient(90deg, hsl(var(--bright-yellow)), hsl(var(--safety-orange)), hsl(var(--vivid-red)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: hsl(var(--safety-orange));
   }
 
   .gradient-text-blue {
-    background: linear-gradient(90deg, hsl(var(--electric-blue)), hsl(var(--cobalt-blue)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: hsl(var(--electric-blue));
   }
 
-  /* Solid CTA button - Vivid Red */
+  /* Solid CTA button - Vivid Red with hover to Orange */
   .cta-button {
     @apply relative overflow-hidden px-10 py-5 rounded-full font-bold transition-all duration-300;
     background: hsl(var(--vivid-red));
@@ -145,21 +139,23 @@
   }
 
   .cta-button:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 0 60px hsl(var(--vivid-red) / 0.7), 0 20px 50px hsl(var(--vivid-red) / 0.4);
+    background: hsl(var(--safety-orange));
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--glow-orange), 0 20px 50px hsl(var(--safety-orange) / 0.3);
   }
 
-  /* Neon glow button */
+  /* Neon glow button - Blue */
   .neon-button {
     @apply relative overflow-hidden px-8 py-4 rounded-full font-semibold transition-all duration-300;
     background: hsl(var(--electric-blue));
+    color: white;
     box-shadow: var(--glow-blue);
     will-change: transform, box-shadow;
   }
 
   .neon-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 50px hsl(var(--electric-blue) / 0.6), 0 10px 40px hsl(var(--electric-blue) / 0.3);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 40px hsl(var(--electric-blue) / 0.4), 0 15px 50px hsl(var(--electric-blue) / 0.2);
   }
 
   /* Magnetic hover effect */
@@ -201,35 +197,41 @@
     50% { transform: translateY(-30px) rotate(5deg); }
   }
 
-  /* Pulse glow */
-  .pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); }
-    50% { box-shadow: 0 0 50px hsl(var(--primary) / 0.8); }
-  }
-
-  /* Service card - 3D tilt ready */
+  /* Service card - White bg with black border, colored shadow on hover */
   .service-card {
     @apply relative overflow-hidden rounded-3xl p-8 transition-all duration-300;
-    background: hsl(var(--card));
-    border: 2px solid hsl(var(--border));
+    background: hsl(var(--background));
+    border: 2px solid hsl(var(--foreground));
     transform-style: preserve-3d;
     will-change: transform, box-shadow;
   }
 
   .service-card:hover {
-    border-color: hsl(var(--bright-yellow));
-    box-shadow: 0 0 40px hsl(var(--bright-yellow) / 0.4), 0 25px 50px -12px hsl(0 0% 0% / 0.5);
+    border-color: hsl(var(--foreground));
+  }
+
+  /* Service card color shadows */
+  .service-card-red:hover {
+    box-shadow: var(--shadow-red);
+  }
+
+  .service-card-blue:hover {
+    box-shadow: var(--shadow-blue);
+  }
+
+  .service-card-orange:hover {
+    box-shadow: var(--shadow-orange);
+  }
+
+  .service-card-yellow:hover {
+    box-shadow: var(--shadow-yellow);
   }
 
   /* Stats card */
   .stats-card {
     @apply relative p-8 rounded-2xl overflow-hidden;
     background: hsl(var(--card));
-    border: 2px solid hsl(var(--border));
+    border: 2px solid hsl(var(--foreground));
   }
 
   /* Process step connecting line */
@@ -248,6 +250,7 @@
   .team-card {
     @apply relative overflow-hidden rounded-3xl;
     background: hsl(var(--card));
+    border: 2px solid hsl(var(--border));
   }
 
   .team-card:hover .team-overlay {
@@ -273,6 +276,7 @@
   .case-study-card {
     @apply relative overflow-hidden rounded-3xl cursor-pointer;
     background: hsl(var(--card));
+    border: 2px solid hsl(var(--border));
   }
 
   .case-study-card:hover .case-study-image {
@@ -307,19 +311,19 @@
   }
 
   .bg-shape-red {
-    background: hsl(var(--vivid-red));
+    background: hsl(var(--vivid-red) / 0.15);
   }
 
   .bg-shape-orange {
-    background: hsl(var(--safety-orange));
+    background: hsl(var(--safety-orange) / 0.15);
   }
 
   .bg-shape-yellow {
-    background: hsl(var(--bright-yellow));
+    background: hsl(var(--bright-yellow) / 0.2);
   }
 
   .bg-shape-blue {
-    background: hsl(var(--electric-blue));
+    background: hsl(var(--electric-blue) / 0.12);
   }
 
   /* Color block sections */
@@ -344,14 +348,38 @@
     @apply tabular-nums;
   }
 
-  /* Yellow glow border on hover */
-  .yellow-glow-border {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  /* Highlight text with solid underlines */
+  .highlight-orange {
+    color: hsl(var(--safety-orange));
   }
 
-  .yellow-glow-border:hover {
-    border-color: hsl(var(--bright-yellow));
-    box-shadow: 0 0 30px hsl(var(--bright-yellow) / 0.5);
+  .highlight-blue {
+    color: hsl(var(--electric-blue));
+    text-decoration: underline;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px;
+    text-decoration-color: hsl(var(--electric-blue));
+  }
+
+  /* Card hover with colored pop shadow */
+  .card-pop-red:hover {
+    box-shadow: 8px 8px 0 hsl(var(--vivid-red));
+    transform: translate(-4px, -4px);
+  }
+
+  .card-pop-blue:hover {
+    box-shadow: 8px 8px 0 hsl(var(--electric-blue));
+    transform: translate(-4px, -4px);
+  }
+
+  .card-pop-orange:hover {
+    box-shadow: 8px 8px 0 hsl(var(--safety-orange));
+    transform: translate(-4px, -4px);
+  }
+
+  .card-pop-yellow:hover {
+    box-shadow: 8px 8px 0 hsl(var(--bright-yellow));
+    transform: translate(-4px, -4px);
   }
 }
 
