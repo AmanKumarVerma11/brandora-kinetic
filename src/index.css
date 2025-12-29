@@ -7,60 +7,60 @@
 
 @layer base {
   :root {
-    /* Base colors - Deep midnight navy theme */
-    --background: 222 47% 7%;
-    --foreground: 210 40% 98%;
+    /* Base colors - Bright multi-color light theme */
+    --background: 40 100% 98%;
+    --foreground: 222 47% 10%;
 
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 10%;
 
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 10%;
 
-    /* Neon Electric Blue as primary */
-    --primary: 187 100% 50%;
-    --primary-foreground: 222 47% 7%;
+    /* Electric Blue as primary */
+    --primary: 215 100% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Cyber Purple as secondary */
-    --secondary: 271 91% 65%;
-    --secondary-foreground: 210 40% 98%;
+    /* Hot Magenta / Purple as secondary */
+    --secondary: 286 92% 60%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Sunset Orange as accent */
-    --accent: 18 100% 60%;
-    --accent-foreground: 222 47% 7%;
+    /* Vivid Orange as accent */
+    --accent: 24 100% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --muted: 222 40% 15%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 38 90% 94%;
+    --muted-foreground: 222 20% 35%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 187 100% 50%;
+    --border: 222 25% 85%;
+    --input: 222 25% 85%;
+    --ring: 215 100% 55%;
 
     --radius: 0.75rem;
 
     /* Custom gradient colors */
-    --neon-blue: 187 100% 50%;
-    --cyber-purple: 271 91% 65%;
-    --sunset-orange: 18 100% 60%;
+    --neon-blue: 215 100% 55%;
+    --cyber-purple: 286 92% 60%;
+    --sunset-orange: 24 100% 55%;
     --midnight: 222 47% 7%;
     --deep-navy: 222 47% 11%;
 
     /* Glow effects */
-    --glow-blue: 0 0 60px hsl(187 100% 50% / 0.4);
-    --glow-purple: 0 0 60px hsl(271 91% 65% / 0.4);
-    --glow-orange: 0 0 60px hsl(18 100% 60% / 0.4);
+    --glow-blue: 0 0 60px hsl(215 100% 55% / 0.35);
+    --glow-purple: 0 0 60px hsl(286 92% 60% / 0.35);
+    --glow-orange: 0 0 60px hsl(24 100% 55% / 0.35);
 
-    --sidebar-background: 222 47% 7%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 187 100% 50%;
-    --sidebar-primary-foreground: 222 47% 7%;
-    --sidebar-accent: 222 40% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 30% 18%;
-    --sidebar-ring: 187 100% 50%;
+    --sidebar-background: 40 100% 98%;
+    --sidebar-foreground: 222 47% 10%;
+    --sidebar-primary: 215 100% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 38 90% 94%;
+    --sidebar-accent-foreground: 222 47% 10%;
+    --sidebar-border: 222 25% 85%;
+    --sidebar-ring: 215 100% 55%;
   }
 
   .dark {
@@ -335,7 +335,7 @@
 
   /* Background gradient orbs */
   .gradient-orb {
-    @apply absolute rounded-full blur-3xl opacity-30;
+    @apply absolute rounded-full blur-3xl opacity-40;
     pointer-events: none;
   }
 
