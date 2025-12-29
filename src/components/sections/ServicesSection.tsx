@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { FadeInView, ScaleInView } from "@/components/ui/ParallaxWrapper";
-import { AnimatedText } from "@/components/ui/AnimatedText";
+import { FadeInView } from "@/components/ui/ParallaxWrapper";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { StaggeredText } from "@/components/ui/StaggeredText";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { 
   Megaphone, 
@@ -20,79 +21,85 @@ const services = [
     title: "Performance Marketing",
     description: "Drive qualified traffic and maximize ROI with expertly managed Google Ads, Meta Ads, and TikTok campaigns.",
     price: "From AED 3,500/month",
-    color: "from-primary to-secondary",
+    accentColor: "electric-blue",
   },
   {
     icon: Share2,
     title: "Social Media Management",
     description: "Build an engaged community with scroll-stopping content, strategic planning, and data-backed growth tactics.",
     price: "From AED 2,800/month",
-    color: "from-secondary to-accent",
+    accentColor: "vivid-red",
   },
   {
     icon: Search,
     title: "SEO & Local SEO",
     description: "Dominate search results and attract high-intent customers actively looking for your products or services.",
     price: "From AED 3,200/month",
-    color: "from-accent to-primary",
+    accentColor: "safety-orange",
   },
   {
     icon: Code,
     title: "Website Development",
     description: "Launch lightning-fast, conversion-optimized websites that deliver exceptional user experiences.",
     price: "From AED 8,000",
-    color: "from-primary to-accent",
+    accentColor: "bright-yellow",
   },
   {
     icon: Smartphone,
     title: "Mobile App Development",
     description: "Build powerful, intuitive mobile applications that users love and drive real business value.",
     price: "From AED 25,000",
-    color: "from-secondary to-primary",
+    accentColor: "electric-blue",
   },
   {
     icon: Palette,
     title: "Branding & Design",
     description: "Create a memorable brand identity with professional logos, brand guidelines, and stunning visual assets.",
     price: "From AED 2,500",
-    color: "from-accent to-secondary",
+    accentColor: "vivid-red",
   },
   {
     icon: Building2,
     title: "Real Estate Marketing",
     description: "Specialized lead generation and sales strategies for property developers and agencies across UAE.",
     price: "From AED 4,500/month",
-    color: "from-primary to-secondary",
+    accentColor: "safety-orange",
   },
   {
     icon: ShoppingCart,
     title: "E-commerce Solutions",
     description: "End-to-end e-commerce solutions from store development to marketing to optimization.",
     price: "From AED 6,000/month",
-    color: "from-secondary to-accent",
+    accentColor: "bright-yellow",
   },
 ];
 
+const accentColors: Record<string, string> = {
+  "electric-blue": "hsl(var(--electric-blue))",
+  "vivid-red": "hsl(var(--vivid-red))",
+  "safety-orange": "hsl(var(--safety-orange))",
+  "bright-yellow": "hsl(var(--bright-yellow))",
+};
+
 export const ServicesSection = () => {
   return (
-    <section id="services" className="relative py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
-      <div className="gradient-orb gradient-orb-blue w-[500px] h-[500px] -bottom-40 -left-40 opacity-20" />
+    <section id="services" className="relative py-32 overflow-hidden bg-card">
+      {/* Noise overlay */}
+      <div className="noise-overlay" />
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <FadeInView>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/20 text-secondary text-sm font-bold mb-6 border border-secondary/30">
               Our Services
             </span>
           </FadeInView>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
-            <AnimatedText text="Everything Your Brand Needs to" />
-            <span className="block gradient-text">
-              <AnimatedText text="Thrive Online" delay={0.3} />
+            <StaggeredText text="Everything Your Brand Needs to" />
+            <span className="block gradient-text mt-2">
+              <StaggeredText text="Thrive Online" delay={0.3} />
             </span>
           </h2>
 
@@ -103,35 +110,40 @@ export const ServicesSection = () => {
           </FadeInView>
         </div>
 
-        {/* Services grid */}
+        {/* Services grid with 3D tilt cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <ScaleInView key={service.title} delay={index * 0.05}>
-              <motion.div
-                className="service-card h-full"
-                whileHover={{ y: -8 }}
-              >
-                {/* Icon */}
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6`}>
-                  <service.icon className="w-7 h-7 text-foreground" />
-                </div>
+            <FadeInView key={service.title} delay={index * 0.05}>
+              <TiltCard className="h-full">
+                <motion.div
+                  className="service-card h-full yellow-glow-border"
+                  whileHover={{ y: -8 }}
+                >
+                  {/* Icon with accent color */}
+                  <div 
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6"
+                    style={{ backgroundColor: accentColors[service.accentColor] }}
+                  >
+                    <service.icon className="w-7 h-7 text-background" />
+                  </div>
 
-                {/* Content */}
-                <h3 className="text-xl font-display font-bold mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  {service.description}
-                </p>
+                  {/* Content */}
+                  <h3 className="text-xl font-display font-bold mb-3 text-foreground">
+                    {service.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    {service.description}
+                  </p>
 
-                {/* Price */}
-                <div className="mt-auto pt-4 border-t border-border/30">
-                  <span className="text-sm font-medium text-primary">
-                    {service.price}
-                  </span>
-                </div>
-              </motion.div>
-            </ScaleInView>
+                  {/* Price */}
+                  <div className="mt-auto pt-4 border-t border-border/50">
+                    <span className="text-sm font-bold text-warning">
+                      {service.price}
+                    </span>
+                  </div>
+                </motion.div>
+              </TiltCard>
+            </FadeInView>
           ))}
         </div>
 
@@ -139,7 +151,7 @@ export const ServicesSection = () => {
         <FadeInView delay={0.4}>
           <div className="text-center mt-16">
             <MagneticButton href="#contact">
-              <span className="inline-flex items-center gap-2 neon-button text-primary-foreground">
+              <span className="inline-flex items-center gap-2 cta-button">
                 Explore All Services
                 <ArrowRight className="w-5 h-5" />
               </span>
