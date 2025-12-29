@@ -1,8 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowDown, Sparkles } from "lucide-react";
-import { AnimatedText, LetterReveal } from "@/components/ui/AnimatedText";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { StaggeredText } from "@/components/ui/StaggeredText";
+import { ScrollShapes } from "@/components/ui/ScrollShapes";
 
 export const HeroSection = () => {
   const ref = useRef(null);
@@ -21,13 +22,14 @@ export const HeroSection = () => {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background gradient orbs */}
-      <div className="gradient-orb gradient-orb-blue w-[600px] h-[600px] -top-40 -right-40 animate-float" />
-      <div className="gradient-orb gradient-orb-purple w-[500px] h-[500px] bottom-0 -left-40 animate-float" style={{ animationDelay: "2s" }} />
-      <div className="gradient-orb gradient-orb-orange w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float" style={{ animationDelay: "4s" }} />
+      {/* Noise texture */}
+      <div className="noise-overlay" />
+      
+      {/* Animated grid overlay */}
+      <div className="grid-overlay" />
 
-      {/* Grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.1)_1px,transparent_1px)] bg-[size:80px_80px]" />
+      {/* Scroll-triggered background shapes */}
+      <ScrollShapes />
 
       <motion.div
         style={{ y, opacity, scale }}
@@ -40,19 +42,33 @@ export const HeroSection = () => {
           transition={{ delay: 0.2 }}
           className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full glass-card"
         >
-          <Sparkles className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium text-muted-foreground">
+          <Sparkles className="w-4 h-4 text-warning" />
+          <span className="text-sm font-medium text-foreground">
             Dubai's Premier 360° Digital Agency
           </span>
         </motion.div>
 
-        {/* Main headline */}
+        {/* Main headline with staggered character animation */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-display font-bold leading-[0.9] tracking-tight mb-8">
-          <LetterReveal text="Elevate Your" className="block" />
-          <span className="block gradient-text mt-2">
-            <LetterReveal text="Brand" delay={0.3} />
+          <span className="block">
+            <StaggeredText text="Elevate Your" />
           </span>
-          <LetterReveal text="in the Digital World" className="block mt-2" delay={0.5} />
+          <span className="block mt-2">
+            <StaggeredText 
+              text="Brand" 
+              delay={0.3} 
+              highlightWords={["Brand"]}
+              highlightColor="hsl(var(--bright-yellow))"
+            />
+          </span>
+          <span className="block mt-2">
+            <StaggeredText 
+              text="in the Digital World" 
+              delay={0.5}
+              highlightWords={["Digital"]}
+              highlightColor="hsl(var(--safety-orange))"
+            />
+          </span>
         </h1>
 
         {/* Subheadline */}
@@ -66,21 +82,22 @@ export const HeroSection = () => {
           From startups to enterprises, we transform businesses into market leaders.
         </motion.p>
 
-        {/* CTA Button */}
+        {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
+          {/* Primary CTA - Vivid Red */}
           <MagneticButton href="https://calendly.com">
-            <span className="neon-button text-lg px-10 py-5 text-primary-foreground">
+            <span className="cta-button text-lg">
               Book Your Free Consultation
             </span>
           </MagneticButton>
           
           <MagneticButton href="#services">
-            <span className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-border/50 text-foreground hover:bg-card/50 transition-colors font-medium">
+            <span className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-border text-foreground hover:border-warning hover:text-warning transition-colors font-medium">
               Explore Services
               <ArrowDown className="w-4 h-4" />
             </span>

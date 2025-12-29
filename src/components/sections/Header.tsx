@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { MagneticButton } from "@/components/ui/MagneticButton";
 import logoImage from "@/assets/logo.png";
 
 const navLinks = [
@@ -12,6 +11,50 @@ const navLinks = [
   { name: "Team", href: "#team" },
   { name: "Contact", href: "#contact" },
 ];
+
+// High-strength magnetic button for header
+const MagneticCTA = ({ children, href }: { children: React.ReactNode; href: string }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 10, stiffness: 200, mass: 0.5 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    // High-strength magnetic pull (0.5 multiplier)
+    const distanceX = (e.clientX - centerX) * 0.5;
+    const distanceY = (e.clientY - centerY) * 0.5;
+    
+    x.set(distanceX);
+    y.set(distanceY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      href={href}
+      target={href.startsWith("http") ? "_blank" : "_self"}
+      rel="noopener noreferrer"
+      className="inline-block"
+      style={{ x: springX, y: springY }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {children}
+    </motion.a>
+  );
+};
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +76,7 @@ export const Header = () => {
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
-            ? "py-3 bg-background/80 backdrop-blur-xl border-b border-border/30" 
+            ? "py-3 bg-background/90 backdrop-blur-xl border-b border-border/50" 
             : "py-6 bg-transparent"
         }`}
       >
@@ -46,7 +89,7 @@ export const Header = () => {
             <img 
               src={logoImage} 
               alt="Brandora Creations logo" 
-              className="h-12 md:h-14 w-auto"
+              className="h-12 md:h-14 w-auto invert"
             />
           </motion.a>
 
@@ -56,26 +99,24 @@ export const Header = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
+                className="text-sm font-medium text-muted-foreground hover:text-warning transition-colors relative group"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-warning transition-all duration-300 group-hover:w-full" />
               </motion.a>
             ))}
           </nav>
 
           <div className="flex items-center gap-4">
-            <MagneticButton
-              href="https://calendly.com"
-              className="hidden md:block"
-            >
-              <span className="neon-button text-sm font-semibold text-primary-foreground">
+            {/* High-strength magnetic CTA */}
+            <MagneticCTA href="https://calendly.com">
+              <span className="hidden md:block cta-button text-sm font-bold px-6 py-3">
                 Book Consultation
               </span>
-            </MagneticButton>
+            </MagneticCTA>
 
             <button
               onClick={() => setIsMobileMenuOpen(true)}
@@ -94,14 +135,14 @@ export const Header = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[100] bg-background/98 backdrop-blur-xl lg:hidden"
           >
             <div className="flex flex-col h-full p-6">
               <div className="flex justify-between items-center">
                 <img 
                   src={logoImage} 
                   alt="Brandora Creations logo" 
-                  className="h-12 w-auto"
+                  className="h-12 w-auto invert"
                 />
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -117,7 +158,7 @@ export const Header = () => {
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-3xl font-display font-bold text-foreground hover:text-primary transition-colors"
+                    className="text-3xl font-display font-bold text-foreground hover:text-warning transition-colors"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
@@ -127,14 +168,11 @@ export const Header = () => {
                 ))}
               </nav>
 
-              <MagneticButton
-                href="https://calendly.com"
-                className="mx-auto"
-              >
-                <span className="neon-button text-base font-semibold text-primary-foreground">
+              <MagneticCTA href="https://calendly.com">
+                <span className="cta-button text-base font-bold mx-auto block text-center">
                   Book Consultation
                 </span>
-              </MagneticButton>
+              </MagneticCTA>
             </div>
           </motion.div>
         )}
