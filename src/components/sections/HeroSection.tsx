@@ -1,14 +1,19 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ArrowDown, Sparkles } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { StaggeredText } from "@/components/ui/StaggeredText";
-import { ScrollShapes } from "@/components/ui/ScrollShapes";
 
 export const HeroSection = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: isMounted ? ref : undefined,
     offset: ["start start", "end start"],
   });
 
@@ -20,16 +25,19 @@ export const HeroSection = () => {
     <section
       id="hero"
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Noise texture */}
-      <div className="noise-overlay" />
-      
-      {/* Animated grid overlay */}
+      {/* Light gray geometric grid overlay */}
       <div className="grid-overlay" />
+      
+      {/* Subtle noise texture */}
+      <div className="noise-overlay" />
 
-      {/* Scroll-triggered background shapes */}
-      <ScrollShapes />
+      {/* Decorative color blocks */}
+      <div className="absolute top-20 right-10 w-32 h-32 bg-shape-yellow rounded-3xl rotate-12 opacity-60" />
+      <div className="absolute bottom-40 left-10 w-24 h-24 bg-shape-red rounded-full opacity-50" />
+      <div className="absolute top-1/3 left-20 w-16 h-16 bg-shape-blue rounded-2xl -rotate-6 opacity-40" />
+      <div className="absolute bottom-20 right-1/4 w-20 h-20 bg-shape-orange rounded-full opacity-50" />
 
       <motion.div
         style={{ y, opacity, scale }}
@@ -42,14 +50,14 @@ export const HeroSection = () => {
           transition={{ delay: 0.2 }}
           className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full glass-card"
         >
-          <Sparkles className="w-4 h-4 text-warning" />
+          <Sparkles className="w-4 h-4 text-accent" />
           <span className="text-sm font-medium text-foreground">
             Dubai's Premier 360° Digital Agency
           </span>
         </motion.div>
 
         {/* Main headline with staggered character animation */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-display font-bold leading-[0.9] tracking-tight mb-8">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-display font-bold leading-[0.9] tracking-tight mb-8 text-foreground">
           <span className="block">
             <StaggeredText text="Elevate Your" />
           </span>
@@ -58,15 +66,15 @@ export const HeroSection = () => {
               text="Brand" 
               delay={0.3} 
               highlightWords={["Brand"]}
-              highlightColor="hsl(var(--bright-yellow))"
+              highlightColor="hsl(var(--safety-orange))"
             />
           </span>
           <span className="block mt-2">
             <StaggeredText 
               text="in the Digital World" 
               delay={0.5}
-              highlightWords={["Digital"]}
-              highlightColor="hsl(var(--safety-orange))"
+              highlightWords={["Digital", "World"]}
+              highlightColor="hsl(var(--electric-blue))"
             />
           </span>
         </h1>
@@ -97,7 +105,7 @@ export const HeroSection = () => {
           </MagneticButton>
           
           <MagneticButton href="#services">
-            <span className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-border text-foreground hover:border-warning hover:text-warning transition-colors font-medium">
+            <span className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors font-medium">
               Explore Services
               <ArrowDown className="w-4 h-4" />
             </span>

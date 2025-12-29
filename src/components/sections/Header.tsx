@@ -76,7 +76,7 @@ export const Header = () => {
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled 
-            ? "py-3 bg-background/90 backdrop-blur-xl border-b border-border/50" 
+            ? "py-3 bg-background/95 backdrop-blur-xl border-b border-border shadow-sm" 
             : "py-6 bg-transparent"
         }`}
       >
@@ -89,28 +89,28 @@ export const Header = () => {
             <img 
               src={logoImage} 
               alt="Brandora Creations logo" 
-              className="h-12 md:h-14 w-auto invert"
+              className="h-14 md:h-16 w-auto"
             />
           </motion.a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation - with proper spacing */}
+          <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-warning transition-colors relative group"
+                className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors relative group"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-warning transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </motion.a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             {/* High-strength magnetic CTA */}
             <MagneticCTA href="https://calendly.com">
               <span className="hidden md:block cta-button text-sm font-bold px-6 py-3">
@@ -142,7 +142,7 @@ export const Header = () => {
                 <img 
                   src={logoImage} 
                   alt="Brandora Creations logo" 
-                  className="h-12 w-auto invert"
+                  className="h-14 w-auto"
                 />
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -158,7 +158,7 @@ export const Header = () => {
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-3xl font-display font-bold text-foreground hover:text-warning transition-colors"
+                    className="text-3xl font-display font-bold text-foreground hover:text-primary transition-colors"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
