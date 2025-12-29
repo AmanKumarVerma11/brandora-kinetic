@@ -1,12 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+import { Header } from "@/components/sections/Header";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { TrustBar } from "@/components/sections/TrustBar";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
+import { WhyChooseSection } from "@/components/sections/WhyChooseSection";
+import { TeamSection } from "@/components/sections/TeamSection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { Footer } from "@/components/sections/Footer";
 
 const Index = () => {
+  useSmoothScroll();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Header />
+      <main>
+        <HeroSection />
+        <TrustBar />
+        <AboutSection />
+        <ServicesSection />
+        <CaseStudiesSection />
+        <WhyChooseSection />
+        <TeamSection />
+        <TestimonialsSection />
+        <ContactSection />
+      </main>
+      <Footer />
     </div>
   );
 };
