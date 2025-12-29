@@ -1,18 +1,24 @@
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { ArrowDown, Sparkles } from "lucide-react";
 import { AnimatedText, LetterReveal } from "@/components/ui/AnimatedText";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export const HeroSection = () => {
-  const { scrollYProgress } = useScroll();
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
 
-  const y = useTransform(scrollYProgress, [0, 0.3], [0, 150]);
-  const opacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.25], [1, 0.95]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
 
   return (
     <section
       id="hero"
+      ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background gradient orbs */}
