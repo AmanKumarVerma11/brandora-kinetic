@@ -40,7 +40,7 @@ const socialLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="relative pt-20 pb-8 overflow-hidden section-safety-orange">
+    <footer className="relative pt-20 pb-8 overflow-hidden bg-black text-white">
       {/* Noise overlay */}
       <div className="noise-overlay" />
 
