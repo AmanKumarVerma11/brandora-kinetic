@@ -71,13 +71,20 @@ const ConnectingLine = ({ index }: { index: number }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    if (ref.current) {
+      setIsMounted(true);
+    }
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: isMounted ? ref : undefined,
-    offset: ["start center", "end center"],
-  });
+  // Only use scroll tracking after component is mounted and ref is attached
+  const { scrollYProgress } = useScroll(
+    isMounted && ref.current
+      ? {
+          target: ref,
+          offset: ["start center", "end center"],
+        }
+      : undefined
+  );
 
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
@@ -89,7 +96,7 @@ const ConnectingLine = ({ index }: { index: number }) => {
       <motion.div
         className="absolute inset-0 rounded-full origin-left"
         style={{
-          scaleX,
+          scaleX: isMounted ? scaleX : 0,
           background: `linear-gradient(90deg, ${colorMap[process[index].color]}, ${colorMap[process[index + 1].color]})`,
         }}
       />
