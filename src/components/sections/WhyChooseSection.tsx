@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useRef } from "react";
 import { FadeInView, ScaleInView } from "@/components/ui/ParallaxWrapper";
 import { StaggeredText } from "@/components/ui/StaggeredText";
 import { Check } from "lucide-react";
@@ -65,38 +65,15 @@ const colorMap: Record<string, string> = {
   "bright-yellow": "hsl(var(--bright-yellow))",
 };
 
-// Connecting line component with scroll animation
+// Simple connecting line without scroll animation to avoid hydration issues
 const ConnectingLine = ({ index }: { index: number }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    if (ref.current) {
-      setIsMounted(true);
-    }
-  }, []);
-
-  // Only use scroll tracking after component is mounted and ref is attached
-  const { scrollYProgress } = useScroll(
-    isMounted && ref.current
-      ? {
-          target: ref,
-          offset: ["start center", "end center"],
-        }
-      : undefined
-  );
-
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
   if (index >= 3) return null;
 
   return (
-    <div ref={ref} className="hidden lg:block absolute top-1/2 left-full w-full h-1 z-0">
-      <div className="absolute inset-0 bg-border rounded-full" />
-      <motion.div
-        className="absolute inset-0 rounded-full origin-left"
+    <div className="hidden lg:block absolute top-1/2 left-full w-full h-1 z-0">
+      <div 
+        className="absolute inset-0 rounded-full"
         style={{
-          scaleX: isMounted ? scaleX : 0,
           background: `linear-gradient(90deg, ${colorMap[process[index].color]}, ${colorMap[process[index + 1].color]})`,
         }}
       />

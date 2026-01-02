@@ -1,30 +1,19 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
 import { ArrowDown, Sparkles } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { StaggeredText } from "@/components/ui/StaggeredText";
 
 export const HeroSection = () => {
-  const ref = useRef<HTMLElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  // Use viewport-based scroll tracking (no ref needed)
+  const { scrollYProgress } = useScroll();
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: isMounted ? ref : undefined,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const y = useTransform(scrollYProgress, [0, 0.3], [0, 300]);
+  const opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.15], [1, 0.9]);
 
   return (
     <section
       id="hero"
-      ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
       {/* Light gray geometric grid overlay */}
