@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ReactNode, useRef } from "react";
+import { ReactNode, useRef, useState, useEffect } from "react";
 
 interface ParallaxWrapperProps {
   children: ReactNode;
@@ -8,16 +8,29 @@ interface ParallaxWrapperProps {
 }
 
 export const ParallaxWrapper = ({ children, speed = 0.5, className = "" }: ParallaxWrapperProps) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
+  const ref = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    if (ref.current) {
+      setIsMounted(true);
+    }
+  }, []);
+
+  // Only use scroll tracking after component is mounted and ref is attached
+  const { scrollYProgress } = useScroll(
+    isMounted && ref.current
+      ? {
+          target: ref,
+          offset: ["start end", "end start"],
+        }
+      : undefined
+  );
 
   const y = useTransform(scrollYProgress, [0, 1], [0, speed * 200]);
 
   return (
-    <motion.div ref={ref} style={{ y }} className={className}>
+    <motion.div ref={ref} style={isMounted ? { y } : {}} className={className}>
       {children}
     </motion.div>
   );
