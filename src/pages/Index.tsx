@@ -4,9 +4,8 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
-import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { WhyChooseSection } from "@/components/sections/WhyChooseSection";
-import { TeamSection } from "@/components/sections/TeamSection";
+import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { Footer } from "@/components/sections/Footer";
@@ -22,9 +21,8 @@ const Index = () => {
         <TrustBar />
         <AboutSection />
         <ServicesSection />
-        <CaseStudiesSection />
         <WhyChooseSection />
-        <TeamSection />
+        <CaseStudiesSection />
         <TestimonialsSection />
         <ContactSection />
       </main>
