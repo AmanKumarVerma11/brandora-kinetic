@@ -9,8 +9,7 @@ const navLinks = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Web & App Design", href: "/web-app-design" },
-  { name: "Case Studies", href: "/#case-studies" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Contact", href: "/contact" },
 ];
 
 // High-strength magnetic button for header
