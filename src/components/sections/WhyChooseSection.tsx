@@ -83,13 +83,13 @@ const ConnectingLine = ({ index }: { index: number }) => {
 
 export const WhyChooseSection = () => {
   return (
-    <section className="relative py-32 overflow-hidden bg-background">
+    <section className="relative py-16 md:py-20 overflow-hidden bg-background">
       {/* Noise overlay */}
       <div className="noise-overlay" />
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Why Choose Us */}
-        <div className="mb-32">
+        <div className="mb-16">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <FadeInView>
               <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-bold mb-6">

@@ -20,7 +20,7 @@ const colorMap: Record<string, string> = {
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="relative py-32 overflow-hidden bg-muted">
+    <section id="about" className="relative py-16 md:py-20 overflow-hidden bg-muted">
       {/* Subtle background accents */}
       <div className="absolute top-10 right-10 w-40 h-40 bg-shape-blue rounded-full opacity-40" />
       <div className="absolute bottom-10 left-10 w-32 h-32 bg-shape-orange rounded-3xl rotate-12 opacity-40" />
