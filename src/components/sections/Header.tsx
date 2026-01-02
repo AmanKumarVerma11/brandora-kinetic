@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import logoImage from "@/assets/logo.png";
 
 const navLinks = [
-  { name: "Home", href: "#hero" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Case Studies", href: "#case-studies" },
-  { name: "Team", href: "#team" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/#services" },
+  { name: "Case Studies", href: "/#case-studies" },
+  { name: "Team", href: "/#team" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 // High-strength magnetic button for header
@@ -81,33 +82,57 @@ export const Header = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <motion.a 
-            href="#hero"
-            className="flex items-center"
-            whileHover={{ scale: 1.05 }}
-          >
-            <img 
-              src={logoImage} 
-              alt="Brandora Creations logo" 
-              className="h-14 md:h-16 w-auto"
-            />
-          </motion.a>
+          <Link to="/">
+            <motion.div 
+              className="flex items-center"
+              whileHover={{ scale: 1.05 }}
+            >
+              <img 
+                src={logoImage} 
+                alt="Brandora Creations logo" 
+                className="h-14 md:h-16 w-auto"
+              />
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation - with proper spacing */}
           <nav className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors relative group"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-              </motion.a>
-            ))}
+            {navLinks.map((link, index) => {
+              const isInternalRoute = link.href.startsWith('/') && !link.href.includes('#');
+              
+              if (isInternalRoute) {
+                return (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link
+                      to={link.href}
+                      className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors relative group"
+                    >
+                      {link.name}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                    </Link>
+                  </motion.div>
+                );
+              }
+              
+              return (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-semibold text-foreground/80 hover:text-primary transition-colors relative group"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                </motion.a>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-6">
@@ -153,19 +178,42 @@ export const Header = () => {
               </div>
 
               <nav className="flex flex-col items-center justify-center flex-1 gap-8">
-                {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-3xl font-display font-bold text-foreground hover:text-primary transition-colors"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    {link.name}
-                  </motion.a>
-                ))}
+                {navLinks.map((link, index) => {
+                  const isInternalRoute = link.href.startsWith('/') && !link.href.includes('#');
+                  
+                  if (isInternalRoute) {
+                    return (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <Link
+                          to={link.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="text-3xl font-display font-bold text-foreground hover:text-primary transition-colors"
+                        >
+                          {link.name}
+                        </Link>
+                      </motion.div>
+                    );
+                  }
+                  
+                  return (
+                    <motion.a
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-3xl font-display font-bold text-foreground hover:text-primary transition-colors"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      {link.name}
+                    </motion.a>
+                  );
+                })}
               </nav>
 
               <MagneticCTA href="https://calendly.com">
