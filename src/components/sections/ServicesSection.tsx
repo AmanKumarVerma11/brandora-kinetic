@@ -76,7 +76,7 @@ const services = [
 
 export const ServicesSection = () => {
   return (
-    <section id="services" className="relative py-32 overflow-hidden bg-muted">
+    <section id="services" className="relative py-16 md:py-20 overflow-hidden bg-muted">
       {/* Noise overlay */}
       <div className="noise-overlay" />
 

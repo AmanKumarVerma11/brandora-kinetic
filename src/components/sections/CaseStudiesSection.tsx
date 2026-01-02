@@ -45,7 +45,7 @@ const caseStudies = [
 
 export const CaseStudiesSection = () => {
   return (
-    <section id="case-studies" className="relative py-32 overflow-hidden">
+    <section id="case-studies" className="relative py-16 md:py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-card/20 via-background to-card/20" />
       <div className="gradient-orb gradient-orb-orange w-[400px] h-[400px] top-1/2 right-0 opacity-20" />

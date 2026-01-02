@@ -99,7 +99,7 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
+    <section id="contact" className="relative py-16 md:py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
       <div className="gradient-orb gradient-orb-purple w-[500px] h-[500px] bottom-0 right-0 opacity-20" />
