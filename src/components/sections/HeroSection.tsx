@@ -14,7 +14,7 @@ export const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-24"
     >
       {/* Light gray geometric grid overlay */}
       <div className="grid-overlay" />
@@ -23,7 +23,7 @@ export const HeroSection = () => {
       <div className="noise-overlay" />
 
       {/* Decorative color blocks */}
-      <div className="absolute top-20 right-10 w-32 h-32 bg-shape-yellow rounded-3xl rotate-12 opacity-60" />
+      <div className="absolute top-32 right-10 w-32 h-32 bg-shape-yellow rounded-3xl rotate-12 opacity-60" />
       <div className="absolute bottom-40 left-10 w-24 h-24 bg-shape-red rounded-full opacity-50" />
       <div className="absolute top-1/3 left-20 w-16 h-16 bg-shape-blue rounded-2xl -rotate-6 opacity-40" />
       <div className="absolute bottom-20 right-1/4 w-20 h-20 bg-shape-orange rounded-full opacity-50" />
@@ -32,18 +32,6 @@ export const HeroSection = () => {
         style={{ y, opacity, scale }}
         className="relative z-10 container mx-auto px-6 text-center"
       >
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full glass-card"
-        >
-          <Sparkles className="w-4 h-4 text-accent" />
-          <span className="text-sm font-medium text-foreground">
-            Dubai's Premier 360° Digital Agency
-          </span>
-        </motion.div>
 
         {/* Main headline with staggered character animation */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-display font-bold leading-[0.9] tracking-tight mb-8 text-foreground">
