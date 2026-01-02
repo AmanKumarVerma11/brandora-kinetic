@@ -53,15 +53,15 @@ export const Footer = () => {
             >
               <Link
                 to="/"
-                className="inline-block text-3xl font-display font-bold text-foreground mb-6"
+                className="inline-block text-3xl font-display font-bold text-white mb-6"
               >
                 BRANDORA
               </Link>
             </motion.div>
-            <p className="text-foreground/80 mb-2 leading-relaxed font-medium">
+            <p className="text-white/90 mb-2 leading-relaxed font-medium">
               Brandora Creations
             </p>
-            <p className="text-foreground/60 mb-6 leading-relaxed text-sm">
+            <p className="text-white/70 mb-6 leading-relaxed text-sm">
               Digital Marketing & Creative Agency in Dubai
             </p>
             <div className="flex gap-3">
@@ -71,7 +71,7 @@ export const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-foreground/10 flex items-center justify-center text-foreground hover:bg-foreground hover:text-accent transition-colors"
+                  className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
                   whileHover={{ y: -4 }}
                   aria-label={social.label}
                 >
@@ -83,13 +83,13 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6 text-foreground">Quick Links</h4>
+            <h4 className="font-display font-bold text-lg mb-6 text-white">Quick Links</h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                    className="text-white/80 hover:text-white transition-colors font-medium"
                   >
                     {link.name}
                   </Link>
@@ -100,13 +100,13 @@ export const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6 text-foreground">Services</h4>
+            <h4 className="font-display font-bold text-lg mb-6 text-white">Services</h4>
             <ul className="space-y-3">
               {serviceLinks.map((service) => (
                 <li key={service.name}>
                   <Link
                     to={service.href}
-                    className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                    className="text-white/80 hover:text-white transition-colors font-medium"
                   >
                     {service.name}
                   </Link>
@@ -117,28 +117,28 @@ export const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6 text-foreground">Contact</h4>
+            <h4 className="font-display font-bold text-lg mb-6 text-white">Contact</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-foreground flex-shrink-0 mt-0.5" />
-                <span className="text-foreground/80">
+                <MapPin className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
+                <span className="text-white/80">
                   Business Bay, Bayview Tower, Dubai, UAE
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-foreground" />
+                <Phone className="w-5 h-5 text-white" />
                 <a 
                   href="tel:+971525046977" 
-                  className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                  className="text-white/80 hover:text-white transition-colors font-medium"
                 >
                   +971 525046977
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-foreground" />
+                <Mail className="w-5 h-5 text-white" />
                 <a 
                   href="mailto:info@brandoracreations.com" 
-                  className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                  className="text-white/80 hover:text-white transition-colors font-medium"
                 >
                   info@brandoracreations.com
                 </a>
@@ -148,15 +148,15 @@ export const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-foreground/20 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-foreground/80 font-medium">
+        <div className="pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-white/80 font-medium">
             © 2025 Brandora Creations. All Rights Reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <Link to="/privacy-policy" className="text-foreground/80 hover:text-foreground transition-colors font-medium">
+            <Link to="/privacy-policy" className="text-white/80 hover:text-white transition-colors font-medium">
               Privacy Policy
             </Link>
-            <Link to="/terms-conditions" className="text-foreground/80 hover:text-foreground transition-colors font-medium">
+            <Link to="/terms-conditions" className="text-white/80 hover:text-white transition-colors font-medium">
               Terms & Conditions
             </Link>
           </div>
