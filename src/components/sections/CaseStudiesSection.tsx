@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { FadeInView } from "@/components/ui/ParallaxWrapper";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { CounterAnimation } from "@/components/ui/CounterAnimation";
@@ -45,9 +44,6 @@ const caseStudies = [
 ];
 
 export const CaseStudiesSection = () => {
-  const containerRef = useRef(null);
-  const { scrollXProgress } = useScroll({ container: containerRef });
-
   return (
     <section id="case-studies" className="relative py-32 overflow-hidden">
       {/* Background */}
