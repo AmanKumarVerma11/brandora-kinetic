@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { 
   Instagram, 
   Linkedin, 
@@ -10,21 +11,24 @@ import {
 } from "lucide-react";
 
 const quickLinks = [
-  { name: "Home", href: "#hero" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Case Studies", href: "#case-studies" },
-  { name: "Team", href: "#team" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Services", href: "/services" },
+  { name: "Web & App Design", href: "/web-app-design" },
+  { name: "Contact", href: "/contact" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
+  { name: "Terms & Conditions", href: "/terms-conditions" },
 ];
 
 const serviceLinks = [
-  "Performance Marketing",
-  "Social Media",
-  "SEO",
-  "Web Development",
-  "App Development",
-  "Branding",
+  { name: "Performance Marketing", href: "/services#performance-marketing" },
+  { name: "Social Media", href: "/services#social-media" },
+  { name: "SEO", href: "/services#seo" },
+  { name: "Web Development", href: "/services#web-development" },
+  { name: "App Development", href: "/services#app-development" },
+  { name: "Branding", href: "/services#branding" },
+  { name: "Real Estate Marketing", href: "/services#real-estate" },
+  { name: "E-commerce Solutions", href: "/services#ecommerce" },
 ];
 
 const socialLinks = [
@@ -44,16 +48,21 @@ export const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <motion.a
-              href="#hero"
-              className="inline-block text-3xl font-display font-bold text-foreground mb-6"
+            <motion.div
               whileHover={{ scale: 1.05 }}
             >
-              BRANDORA
-            </motion.a>
-            <p className="text-foreground/80 mb-6 leading-relaxed">
-              Dubai's premier 360° digital marketing agency delivering data-driven 
-              strategies and creative excellence.
+              <Link
+                to="/"
+                className="inline-block text-3xl font-display font-bold text-foreground mb-6"
+              >
+                BRANDORA
+              </Link>
+            </motion.div>
+            <p className="text-foreground/80 mb-2 leading-relaxed font-medium">
+              Brandora Creations
+            </p>
+            <p className="text-foreground/60 mb-6 leading-relaxed text-sm">
+              Digital Marketing & Creative Agency in Dubai
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -78,12 +87,12 @@ export const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-foreground/80 hover:text-foreground transition-colors font-medium"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -94,13 +103,13 @@ export const Footer = () => {
             <h4 className="font-display font-bold text-lg mb-6 text-foreground">Services</h4>
             <ul className="space-y-3">
               {serviceLinks.map((service) => (
-                <li key={service}>
-                  <a
-                    href="#services"
+                <li key={service.name}>
+                  <Link
+                    to={service.href}
                     className="text-foreground/80 hover:text-foreground transition-colors font-medium"
                   >
-                    {service}
-                  </a>
+                    {service.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -144,12 +153,12 @@ export const Footer = () => {
             © 2025 Brandora Creations. All Rights Reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <a href="#" className="text-foreground/80 hover:text-foreground transition-colors font-medium">
+            <Link to="/privacy-policy" className="text-foreground/80 hover:text-foreground transition-colors font-medium">
               Privacy Policy
-            </a>
-            <a href="#" className="text-foreground/80 hover:text-foreground transition-colors font-medium">
+            </Link>
+            <Link to="/terms-conditions" className="text-foreground/80 hover:text-foreground transition-colors font-medium">
               Terms & Conditions
-            </a>
+            </Link>
           </div>
         </div>
       </div>
